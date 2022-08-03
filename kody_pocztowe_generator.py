@@ -1,4 +1,9 @@
 def kody_pocztowe(pierwsza_wartość,druga_wartość):
+    """
+    Pobiera zakres kodów pocztowych i 
+    zwraca tablicę kodów pocztowych znadujących się w podanym zakresie
+    """
+    
     #konwertowanie na int
     poczatek = list(pierwsza_wartość)
     koniec = list(druga_wartość)
@@ -24,18 +29,43 @@ def kody_pocztowe(pierwsza_wartość,druga_wartość):
         a1 = a1 + 1
     c = 0
     h = 1
-    while(c < 999):
-        drugi.append(h)
-        h = h + 1
-        c = c + 1
+    if(poczatek1 == koniec1):
+        c = poczatek2
+        while(c <= koniec2):
+            drugi.append(c)
+            c = c + 1
+    else:
+        while(c < 999):
+            drugi.append(h)
+            h = h + 1
+            c = c + 1
     #wpisywanie tego do tablicy
     end = []
-    
     c = 0
-    h = 0
-    for x in pierwszy:
-        h = h + 1
+    h = len(pierwszy)
     while(c < h):
+        if(h == 1):
+            b = poczatek2
+            c1 = 0
+            while(b <= koniec2):
+                if(b <9):
+                    if(c < 9 and poczatek1 < 9):
+                        end.append('0' + str(pierwszy[c]) + '-' + '00' + str(drugi[c1]))
+                    else:
+                        end.append(str(pierwszy[c]) + '-' + '00' + str(drugi[c1]))
+                elif(b>=9 and b<99):
+                    if(c < 9 and poczatek1 < 9):
+                        end.append('0' + str(pierwszy[c]) + '-' + '0' + str(drugi[c1]))
+                    else:
+                        end.append(str(pierwszy[c]) + '-' + '0' + str(drugi[c1]))
+                else:
+                    if(c < 9 and poczatek1 < 9):
+                        end.append('0' + str(pierwszy[c]) + '-' + str(drugi[c1]))
+                    else:
+                        end.append(str(pierwszy[c]) + '-' + str(drugi[c1]))
+                b = b + 1
+                c1 += 1
+            return end
         if(c == 0):
             b = poczatek2
             while(b < 999):
@@ -96,10 +126,8 @@ def kody_pocztowe(pierwsza_wartość,druga_wartość):
         c = c + 1
     return end
 
-min = input("Podaj kod pocztowy mniejsza wartość: XX-XXX ")
-max = input("Podaj kod pocztowy większa wartość: XX-XXX ")
-
-test = kody_pocztowe(min,max)
-
-print(test)
+if(__name__ == "__main__"):
+    min = input("Podaj kod pocztowy mniejsza wartość: XX-XXX ")
+    max = input("Podaj kod pocztowy większa wartość: XX-XXX ")
+    print(kody_pocztowe(min,max))
 
